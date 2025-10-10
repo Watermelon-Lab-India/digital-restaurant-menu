@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import config from '../utils/config';
 
 const About = () => {
   return (
@@ -9,9 +10,9 @@ const About = () => {
           
           <div className="prose max-w-none">
             <div className="mb-12">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">Welcome to Apna Sweets</h2>
+              <h2 className="text-2xl font-semibold text-gray-800 mb-4">Welcome to {config.restaurantName}</h2>
               <p className="text-gray-600 mb-6">
-                Established in 1990, Apna Sweets has been serving authentic Indian sweets and snacks with love and dedication. 
+                Established in 1990, {config.restaurantName} has been serving authentic Indian sweets and snacks with love and dedication. 
                 What started as a small sweet shop has now become a beloved destination for food lovers seeking traditional flavors.
               </p>
             </div>

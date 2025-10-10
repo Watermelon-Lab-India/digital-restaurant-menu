@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Menu } from 'lucide-react';
 import { useState } from 'react';
+import config from '../utils/config';
 
 const Header = () => {
   const location = useLocation();
@@ -24,8 +25,8 @@ const Header = () => {
     <header className="bg-white shadow-md">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
-          <Link to="/" className="text-2xl font-bold text-amber-600">
-            Apna Sweets
+          <Link to="/" className="text-2xl font-bold text-amber-600 flex items-center">
+            <img src={config.logoPath} alt={config.restaurantName} className="h-20 mr-2" />
           </Link>
 
           {/* Desktop Navigation */}

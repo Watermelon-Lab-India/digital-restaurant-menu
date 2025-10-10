@@ -108,23 +108,21 @@ const Menu = () => {
         </div>
 
         {/* Menu Items */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+        <div className="flex flex-col gap-4">
           {filteredItems.length > 0 ? (
             filteredItems.map((item, index) => (
-              <div key={index} className="group bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow duration-200 aspect-square flex flex-col">
-                <div className="p-3 flex-1 flex flex-col">
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-sm font-medium text-gray-800 group-hover:text-amber-600 transition-colors line-clamp-2">
-                      {item.name}
-                    </h3>
-                    <span className="text-amber-600 font-medium text-sm whitespace-nowrap ml-2">
-                      ₹{item.price}
-                    </span>
-                  </div>
-                  <span className="mt-auto text-xs text-gray-500 bg-gray-50 px-2 py-1 rounded-full self-start">
+              <div key={index} className="flex items-center justify-between bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow duration-200 p-3">
+                <div className="flex-1 flex flex-col">
+                  <h3 className="text-base font-medium text-gray-800 group-hover:text-amber-600 transition-colors line-clamp-2">
+                    {item.name}
+                  </h3>
+                  <span className="text-xs text-gray-500 bg-gray-50 px-2 py-1 rounded-full self-start mt-1">
                     {item.category}
                   </span>
                 </div>
+                <span className="text-amber-600 font-medium text-base whitespace-nowrap ml-4">
+                  ₹{item.price}
+                </span>
               </div>
             ))
           ) : (

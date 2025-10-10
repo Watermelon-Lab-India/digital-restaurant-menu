@@ -1,12 +1,13 @@
+import config from '../utils/config';
 const Location = () => {
   const address = {
-    street: '123 Sweet Street',
-    city: 'Indore',
-    state: 'Madhya Pradesh',
-    pincode: '452001',
-    phone: '+91 9424900099',
-    email: 'info@apnasweets.com',
-    mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235527.4544703886!2d75.72376168437498!3d22.72391167701489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fcad1b410ddb%3A0x96ec4da2c1d43333!2sIndore%2C%20Madhya%20Pradesh!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin'
+    street: config.contact.address.split(',')[0].trim(),
+    city: config.contact.address.split(',')[1].trim(),
+    state: config.contact.address.split(',')[2].trim().split(' ')[0],
+    pincode: config.contact.address.split(',')[2].trim().split(' ')[1],
+    phone: config.contact.phone,
+    email: config.contact.email,
+    mapUrl: config.mapUrl,
   };
 
   return (
@@ -79,3 +80,5 @@ const Location = () => {
 };
 
 export default Location;
+
+          <h1 className="text-3xl font-bold text-gray-800 mb-6">Visit {config.restaurantName}</h1>

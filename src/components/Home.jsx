@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useMenu } from '../context/MenuContext';
+import config from '../utils/config';
 
 const Home = () => {
   const { categories, menuItems, loading } = useMenu();
@@ -29,9 +30,7 @@ const Home = () => {
       {/* Hero Section */}
       <section className="bg-amber-50 py-20">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-            Welcome to Apna Sweets
-          </h1>
+          <h1 className="text-5xl font-bold text-gray-800 mb-4">Welcome to {config.restaurantName}</h1>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             Experience the authentic taste of traditional Indian sweets and snacks, made with love and the finest ingredients.
           </p>
@@ -70,10 +69,7 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-gray-800 mb-6">Our Story</h2>
-            <p className="text-gray-600 mb-8">
-              Established with a passion for authentic Indian sweets and snacks, Apna Sweets has been serving happiness since 1990. 
-              Our secret recipes passed down through generations, ensure every bite is a delightful experience.
-            </p>
+            <p className="text-lg text-gray-800 mb-8">Established with a passion for authentic Indian sweets and snacks, {config.restaurantName} has been serving happiness since 1990.</p>
             <Link 
               to="/about" 
               className="text-amber-600 font-semibold hover:text-amber-700 inline-flex items-center"
