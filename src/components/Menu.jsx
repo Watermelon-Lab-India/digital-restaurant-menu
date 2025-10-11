@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useMenu } from '../context/MenuContext';
 
@@ -7,6 +7,7 @@ const Menu = () => {
   const { category: urlCategory } = useParams();
   const [activeCategory, setActiveCategory] = useState('all');
   const navigate = useNavigate();
+  const activeCategoryRef = useRef(null);
 
   // Normalize category names for comparison and URL slugs
   const normalizeCategory = (category) => {
@@ -31,19 +32,30 @@ const Menu = () => {
         cat => createSlug(cat) === urlCategory.toLowerCase()
       );
 
-      console.log('URL Category:', urlCategory);
-      console.log('Available categories:', categories);
-      console.log('Found category:', foundCategory);
-
       if (foundCategory) {
         setActiveCategory(foundCategory);
       } else {
-        console.warn(`Category "${urlCategory}" not found. Redirecting to all items.`);
         navigate('/menu');
         setActiveCategory('all');
       }
     }
   }, [urlCategory, categories, navigate]);
+
+  // Scroll to top when category changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [urlCategory]);
+
+  // Scroll active category into view
+  useEffect(() => {
+    if (activeCategoryRef.current) {
+      activeCategoryRef.current.scrollIntoView({
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'nearest',
+      });
+    }
+  }, [activeCategory]);
 
   // Filter items by active category
   const filteredItems = activeCategory === 'all' 
@@ -88,6 +100,7 @@ const Menu = () => {
                   ? 'bg-amber-500 text-white'
                   : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
               }`}
+              ref={activeCategory === 'all' ? activeCategoryRef : null}
             >
               All Items
             </button>
@@ -100,6 +113,7 @@ const Menu = () => {
                     ? 'bg-amber-500 text-white'
                     : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
                 }`}
+                ref={normalizeCategory(activeCategory) === normalizeCategory(category) ? activeCategoryRef : null}
               >
                 {category}
               </button>
