@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { fetchMenu } from '../utils/fetchMenu';
-
+import config from '../utils/config';
 const MenuContext = createContext();
 
 export const MenuProvider = ({ children }) => {
@@ -8,11 +8,11 @@ export const MenuProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-    const restaurantName = 'Malakar';
+
   useEffect(() => {
     const loadMenu = async () => {
       try {
-        const data = await fetchMenu('1PQvbr6ogK89_GsAI2r3N9JPWZihoUpAP8PPjS8RA44g', restaurantName);
+        const data = await fetchMenu('1PQvbr6ogK89_GsAI2r3N9JPWZihoUpAP8PPjS8RA44g', config.googleSheetName);
         setMenuItems(data);
         
         // Extract unique categories

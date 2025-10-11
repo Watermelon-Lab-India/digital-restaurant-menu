@@ -1,4 +1,5 @@
 const config = {
+  googleSheetName: "Malakar",
   restaurantName: "New Malakar Restaurant",
   contact: {
     address: "97 C vaishali nagar GOPUR , SQUARE, Ring Rd, Indore, Madhya Pradesh 452009",
