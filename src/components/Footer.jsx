@@ -27,6 +27,18 @@ const Footer = () => {
               <p>{config.contact.address.split(',')[0].trim()}, {config.contact.address.split(',')[1].trim()}</p>
               <p>{config.contact.address.split(',')[2].trim()}</p>
             </div>
+            {/* Map Embed */}
+            <div className="mt-8">
+              <iframe
+                src={config.mapUrl}
+                width="100%"
+                height="200"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
           </div>
 
           {/* Social Media */}
