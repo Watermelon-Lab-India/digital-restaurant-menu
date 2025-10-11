@@ -1,6 +1,7 @@
 // src/utils/fetchMenu.js
 export async function fetchMenu(sheetId, sheetName = 'menu') {
   try {
+    console.log("sheetName:", sheetName);
     // Construct the CSV export URL
     const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}`;
     

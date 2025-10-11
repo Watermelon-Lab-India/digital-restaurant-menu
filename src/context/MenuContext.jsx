@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { fetchMenu } from '../utils/fetchMenu';
 import config from '../utils/config';
+
 const MenuContext = createContext();
 
 export const MenuProvider = ({ children }) => {
