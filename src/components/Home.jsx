@@ -28,10 +28,10 @@ const Home = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-amber-50 py-20">
+      <section className="bg-amber-50 py-10">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold text-gray-800 mb-4">Welcome to {config.restaurantName}</h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          <h1 className="text-3xl font-bold text-gray-800 mb-4">Welcome to {config.restaurantName}</h1>
+          <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
             Experience the authentic taste of traditional Indian sweets and snacks, made with love and the finest ingredients.
           </p>
           <Link 
