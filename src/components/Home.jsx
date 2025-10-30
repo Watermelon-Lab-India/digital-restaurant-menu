@@ -1,32 +1,28 @@
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useMenu } from '../context/MenuContext';
 import config from '../utils/config';
 
 const Home = () => {
-  const { categories, menuItems, loading } = useMenu();
+  const { menuItems } = useMenu();
 
-  // Create URL-friendly slug for categories
+  const categories = useMemo(() => {
+    if (!menuItems) return [];
+    const categoryMap = new Map();
+    menuItems.forEach(item => {
+      if (!categoryMap.has(item.category)) {
+        categoryMap.set(item.category, { name: item.category, imageUrl: '/category-image.png' });
+      }
+    });
+    return Array.from(categoryMap.values());
+  }, [menuItems]);
+
   const createSlug = (category) => {
-    return category.toLowerCase().replace(/\s+/g, '-');
+    return category.toLowerCase().replace(/ /g, '-').replace(/\//g, '-');
   };
 
-  // Count items per category
-  const categoriesWithCount = categories.map(category => ({
-    name: category,
-    count: menuItems.filter(item => item.category === category).length,
-    slug: createSlug(category)
-  }));
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-amber-500"></div>
-      </div>
-    );
-  }
-
   return (
-    <div>
+    <div className="home-container">
       {/* Hero Section */}
       <section className="bg-amber-50 py-10">
         <div className="container mx-auto px-4 text-center">
@@ -34,8 +30,8 @@ const Home = () => {
           <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
             Experience the authentic taste of traditional Indian sweets and snacks, made with love and the finest ingredients.
           </p>
-          <Link 
-            to="/menu" 
+          <Link
+            to="/menu"
             className="bg-amber-500 hover:bg-amber-600 text-white font-semibold py-3 px-8 rounded-full inline-block transition duration-300"
           >
             View Our Menu
@@ -43,26 +39,22 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Categories Section */}
-      <section className="py-10">
-        <div className="container mx-auto px-4">
-          <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Our Categories</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-            {categoriesWithCount.map((category, index) => (
-              <Link 
-                key={index} 
-                to={`/menu/${category.slug}`}
-                className="group bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 border border-gray-100 aspect-square flex flex-col items-center justify-center p-3 text-center"
-              >
-                <h3 className="text-sm font-medium text-gray-800 group-hover:text-amber-600 transition-colors line-clamp-2">
-                  {category.name}
-                </h3>
-                <p className="text-xs text-amber-600 mt-1">{category.count} items</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <div className="categories-grid">
+        {categories.map((category) => (
+          <Link
+            to={`/menu/${createSlug(category.name)}`}
+            key={category.name}
+            className="category-card"
+            style={{
+              backgroundImage: `url(${category.imageUrl})`,
+            }}
+          >
+            <div className="category-card-overlay">
+              <h3>{category.name}</h3>
+            </div>
+          </Link>
+        ))}
+      </div>
 
       {/* About Preview Section */}
       <section className="py-16 bg-gray-50">
@@ -70,8 +62,8 @@ const Home = () => {
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-gray-800 mb-6">Our Story</h2>
             <p className="text-lg text-gray-800 mb-8">Established with a passion for authentic Indian sweets and snacks, {config.restaurantName} has been serving happiness since 1990.</p>
-            <Link 
-              to="/about" 
+            <Link
+              to="/about"
               className="text-amber-600 font-semibold hover:text-amber-700 inline-flex items-center"
             >
               Learn more about us

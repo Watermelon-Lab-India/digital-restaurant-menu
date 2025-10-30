@@ -9,6 +9,7 @@ import Home from './components/Home';
 import Menu from './components/Menu';
 import About from './components/About';
 import Location from './components/Location';
+import BookTable from './components/BookTable'; // Import the new BookTable component
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
               <Route path="/menu/:category" element={<Menu />} />
               <Route path="/about" element={<About />} />
               <Route path="/location" element={<Location />} />
+              <Route path="/booktable" element={<BookTable />} /> {/* New route for BookTable */}
             </Routes>
           </main>
           <Footer />
@@ -32,4 +34,5 @@ function App() {
   );
 }
 
+// https://drive.google.com/file/d/1fu2ado-0WrJEqDC6qPL71qlJbOg8amur/view?usp=drive_link
 export default App;

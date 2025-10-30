@@ -70,4 +70,8 @@ MIT
 
 ---
 
-Made with ❤️ by [Your Name]
+Made with ❤️ by [Appnosys]
+
+Change config file for each client in `src/config.js`
+change in index.html also
+change logo in public folder

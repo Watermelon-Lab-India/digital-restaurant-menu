@@ -12,11 +12,15 @@ const Menu = () => {
   // Normalize category names for comparison and URL slugs
   const normalizeCategory = (category) => {
     if (!category) return '';
-    return category.toString().toLowerCase().trim();
+    // If category is an object, use its name property, otherwise use the category itself
+    const categoryName = typeof category === 'object' ? category.name : category;
+    return categoryName.toString().toLowerCase().trim();
   };
 
   const createSlug = (category) => {
-    return normalizeCategory(category).replace(/\s+/g, '-');
+    // If category is an object, use its name property, otherwise use the category itself
+    const categoryName = typeof category === 'object' ? category.name : category;
+    return normalizeCategory(categoryName).replace(/[\s/]+/g, '-');
   };
 
   // Find the exact category name from the URL parameter
@@ -71,7 +75,7 @@ const Menu = () => {
     } else {
       const urlFriendlyCategory = createSlug(category);
       navigate(`/menu/${urlFriendlyCategory}`);
-      setActiveCategory(category);
+      setActiveCategory(category); // Keep the full category object in activeCategory
     }
   };
 
@@ -87,7 +91,7 @@ const Menu = () => {
     <div className="py-12 bg-gray-50 min-h-screen">
       <div className="container mx-auto px-4">
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">
-          {activeCategory === 'all' ? 'Our Menu' : activeCategory}
+          {activeCategory === 'all' ? 'Our Menu' : activeCategory.name} {/* Display category.name */}
         </h1>
         
         {/* Category Filter */}
@@ -115,7 +119,7 @@ const Menu = () => {
                 }`}
                 ref={normalizeCategory(activeCategory) === normalizeCategory(category) ? activeCategoryRef : null}
               >
-                {category}
+                {category.name} {/* Display category.name */}
               </button>
             ))}
           </div>
@@ -130,9 +134,9 @@ const Menu = () => {
                   <h3 className="text-base font-medium text-gray-800 group-hover:text-amber-600 transition-colors line-clamp-2">
                     {item.name}
                   </h3>
-                  <span className="text-xs text-gray-500 bg-gray-50 px-2 py-1 rounded-full self-start mt-1">
-                    {item.category}
-                  </span>
+                  <p className="text-sm text-gray-500 line-clamp-2">
+                    {item.description || ''}
+                  </p>
                 </div>
                 <span className="text-amber-600 font-medium text-base whitespace-nowrap ml-4">
                   ₹{item.price}

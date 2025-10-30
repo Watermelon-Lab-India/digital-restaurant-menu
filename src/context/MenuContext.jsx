@@ -13,12 +13,17 @@ export const MenuProvider = ({ children }) => {
   useEffect(() => {
     const loadMenu = async () => {
       try {
-        const data = await fetchMenu('1PQvbr6ogK89_GsAI2r3N9JPWZihoUpAP8PPjS8RA44g', config.googleSheetName);
+        const data = await fetchMenu(config.googleSheetId, config.googleSheetName);
         setMenuItems(data);
         
-        // Extract unique categories
-        const uniqueCategories = [...new Set(data.map(item => item.category))];
-        setCategories(uniqueCategories);
+        // Extract unique categories with their image URLs
+        const uniqueCategoriesMap = new Map();
+        data.forEach(item => {
+          if (!uniqueCategoriesMap.has(item.category)) {
+            uniqueCategoriesMap.set(item.category, { name: item.category, imageUrl: item.imageUrl });
+          }
+        });
+        setCategories(Array.from(uniqueCategoriesMap.values()));
       } catch (err) {
         setError('Failed to load menu. Using sample data instead.');
         console.error(err);

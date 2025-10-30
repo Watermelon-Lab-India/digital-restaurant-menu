@@ -17,15 +17,16 @@ const Footer = () => {
           <div className="text-center md:text-left">
             <h3 className="text-xl font-bold mb-4">CONTACT US</h3>
             <div className="space-y-2">
-              <p>{config.contact.email}</p>
-              <p className="flex items-center justify-center md:justify-start">
-                <Phone className="mr-2 h-5 w-5 text-amber-300" />
-                <a href={`tel:${config.contact.phone.replace(/\s+/g, '')}`} className="hover:text-amber-300">
-                  {config.contact.phone}
-                </a>
-              </p>
-              <p>{config.contact.address.split(',')[0].trim()}, {config.contact.address.split(',')[1].trim()}</p>
-              <p>{config.contact.address.split(',')[2].trim()}</p>
+              {config.contact.email && <p>{config.contact.email}</p>}
+              {config.contact.phone && (
+                <p className="flex items-center justify-center md:justify-start">
+                  <Phone className="mr-2 h-5 w-5 text-amber-300" />
+                  <a href={`tel:${config.contact.phone.replace(/\s+/g, '')}`} className="hover:text-amber-300">
+                    {config.contact.phone}
+                  </a>
+                </p>
+              )}
+              <p>{config.contact.address}</p>
             </div>
             {/* Map Embed */}
             <div className="mt-8">

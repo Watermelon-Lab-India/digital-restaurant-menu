@@ -26,3 +26,26 @@ body {
 }
 
 /* Add any other global styles here */
+
+.categories-grid {
+  @apply grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3 p-3;
+}
+
+.category-card {
+  @apply relative block rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 border border-gray-100 aspect-square overflow-hidden;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem;
+  text-align: center;
+}
+
+.category-card h3 {
+  @apply relative z-10 text-sm font-medium text-white transition-colors line-clamp-2;
+}
+
+.category-card p {
+  @apply relative z-10 text-xs text-white mt-1;
+}

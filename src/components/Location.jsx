@@ -23,24 +23,30 @@ const Location = () => {
               <div>
                 <h3 className="font-medium text-gray-700">Address</h3>
                 <p className="text-gray-600">
-                  {address.street}<br />
-                  {address.city}, {address.state}<br />
-                  {address.pincode}
+                  {config.contact.address}
                 </p>
               </div>
               
               <div>
                 <h3 className="font-medium text-gray-700">Phone</h3>
-                <a href={`tel:${address.phone.replace(/\s+/g, '')}`} className="text-amber-600 hover:underline">
-                  {address.phone}
-                </a>
+                {address.phone ? (
+                  <a href={`tel:${address.phone.replace(/\s+/g, '')}`} className="text-amber-600 hover:underline">
+                    {address.phone}
+                  </a>
+                ) : (
+                  <p className="text-gray-600">N/A</p>
+                )}
               </div>
               
               <div>
                 <h3 className="font-medium text-gray-700">Email</h3>
-                <a href={`mailto:${address.email}`} className="text-amber-600 hover:underline">
-                  {address.email}
-                </a>
+                {address.email ? (
+                  <a href={`mailto:${address.email}`} className="text-amber-600 hover:underline">
+                    {address.email}
+                  </a>
+                ) : (
+                  <p className="text-gray-600">N/A</p>
+                )}
               </div>
               
               <div className="pt-4">
