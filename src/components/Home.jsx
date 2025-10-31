@@ -5,21 +5,39 @@ import config from '../utils/config';
 
 const Home = () => {
   const { menuItems } = useMenu();
+  // Normalize category names to match Menu.jsx logic
+  const normalizeCategory = (category) => {
+    if (!category) return '';
+    const categoryName = typeof category === 'object' ? category.name : category;
+    return categoryName.toString().toLowerCase().trim();
+  };
 
-  const categories = useMemo(() => {
+  // Match createSlug logic from Menu.jsx to preserve parentheses
+  const createSlug = (category) => {
+    const categoryName = typeof category === 'object' ? category.name : category;
+    return normalizeCategory(categoryName)
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/[^a-z0-9-]/g, ''); // Remove all characters that are not a-z, 0-9, or hyphen
+  };
+  const categoriesWithCount = useMemo(() => {
     if (!menuItems) return [];
     const categoryMap = new Map();
+
+
     menuItems.forEach(item => {
       if (!categoryMap.has(item.category)) {
-        categoryMap.set(item.category, { name: item.category, imageUrl: '/category-image.png' });
+        const originalCategory = item.category;
+        const lowerCaseCategory = createSlug(originalCategory);//.toLowerCase().replace(/ /g, '-').replace(/[^a-z0-9-]/g, ''); // Normalize category name: lowercase, spaces to hyphens, remove other special chars
+        const imageUrl = `/categoryImages/${lowerCaseCategory}.png`; // Construct image URL directly
+        console.log(`Processing category: "${originalCategory}", Processed for matching: "${lowerCaseCategory}", Image URL: ${imageUrl}`);
+        categoryMap.set(item.category, { name: item.category, imageUrl: imageUrl, count: 0 });
       }
+      categoryMap.get(item.category).count++;
     });
     return Array.from(categoryMap.values());
   }, [menuItems]);
 
-  const createSlug = (category) => {
-    return category.toLowerCase().replace(/ /g, '-').replace(/\//g, '-');
-  };
+
 
   return (
     <div className="home-container">
@@ -39,22 +57,31 @@ const Home = () => {
         </div>
       </section>
 
-      <div className="categories-grid">
-        {categories.map((category) => (
-          <Link
-            to={`/menu/${createSlug(category.name)}`}
-            key={category.name}
-            className="category-card"
-            style={{
-              backgroundImage: `url(${category.imageUrl})`,
-            }}
-          >
-            <div className="category-card-overlay">
-              <h3>{category.name}</h3>
-            </div>
-          </Link>
-        ))}
-      </div>
+      {/* Categories Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl font-bold text-gray-800 text-center mb-10">Our Categories</h2>
+          <div className="categories-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {categoriesWithCount.map((category) => (
+              <Link
+                to={`/menu/${createSlug(category.name)}`}
+                key={category.name}
+                className="category-card relative block overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+                style={{
+                  backgroundImage: `url(${category.imageUrl})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  paddingTop: '100%', // Maintain aspect ratio for card size
+                }}
+              >
+                {/* <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center p-4">
+                  <h3 className="text-white text-xl font-semibold text-center">{category.name} ({category.count})</h3>
+                </div> */}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* About Preview Section */}
       <section className="py-16 bg-gray-50">

@@ -20,7 +20,9 @@ const Menu = () => {
   const createSlug = (category) => {
     // If category is an object, use its name property, otherwise use the category itself
     const categoryName = typeof category === 'object' ? category.name : category;
-    return normalizeCategory(categoryName).replace(/[\s/]+/g, '-');
+    return normalizeCategory(categoryName)
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/[^a-z0-9-]/g, ''); // Remove all characters that are not a-z, 0-9, or hyphen
   };
 
   // Find the exact category name from the URL parameter
