@@ -74,9 +74,9 @@ const Home = () => {
                   paddingTop: '100%', // Maintain aspect ratio for card size
                 }}
               >
-                {/* <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center p-4">
-                  <h3 className="text-white text-xl font-semibold text-center">{category.name} ({category.count})</h3>
-                </div> */}
+                <div className="absolute inset-0  flex items-center justify-center p-4">
+                  <h3 className="text-white text-xl font-semibold text-center">{category.name}</h3>
+                </div>
               </Link>
             ))}
           </div>
