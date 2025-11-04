@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useMenu } from '../context/MenuContext';
 
@@ -8,6 +8,15 @@ const Menu = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const navigate = useNavigate();
   const activeCategoryRef = useRef(null);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Effect to reset active category to 'all' when search term is entered
+  useEffect(() => {
+    if (searchTerm) {
+      setActiveCategory('all');
+      navigate('/menu'); // Optionally navigate to /menu to clear category from URL
+    }
+  }, [searchTerm, navigate]);
 
   // Normalize category names for comparison and URL slugs
   const normalizeCategory = (category) => {
@@ -63,12 +72,22 @@ const Menu = () => {
     }
   }, [activeCategory]);
 
-  // Filter items by active category
-  const filteredItems = activeCategory === 'all' 
-    ? menuItems 
-    : menuItems.filter(item => 
-        normalizeCategory(item.category) === normalizeCategory(activeCategory)
+  // Filter items by active category and search term
+  const filteredItems = useMemo(() => {
+    let itemsToFilter = activeCategory === 'all' 
+      ? menuItems 
+      : menuItems.filter(item => 
+          normalizeCategory(item.category) === normalizeCategory(activeCategory)
+        );
+
+    if (searchTerm) {
+      itemsToFilter = itemsToFilter.filter(item => 
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (item.description && item.description.toLowerCase().includes(searchTerm.toLowerCase()))
       );
+    }
+    return itemsToFilter;
+  }, [activeCategory, menuItems, searchTerm]);
 
   const handleCategoryClick = (category) => {
     if (category === 'all') {
@@ -96,6 +115,17 @@ const Menu = () => {
           {activeCategory === 'all' ? 'Our Menu' : activeCategory.name} {/* Display category.name */}
         </h1>
         
+        {/* Search Input */}
+        <div className="mb-6">
+          <input
+            type="text"
+            placeholder="Search for dishes..."
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+
         {/* Category Filter */}
         <div className="flex overflow-x-auto pb-2 mb-6 hide-scrollbar">
           <div className="flex space-x-2">
