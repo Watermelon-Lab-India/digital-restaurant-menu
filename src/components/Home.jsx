@@ -62,6 +62,20 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <h2 className="text-2xl font-bold text-gray-800 text-center mb-10">Our Categories</h2>
           <div className="categories-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {/* All Items Tile */}
+            <Link to="/menu"
+              className="category-card relative block overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+              style={{
+                backgroundImage: `url(/logo-village.png)`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                paddingTop: '100%', // Maintain aspect ratio for card size
+              }}
+            >
+              <div className="absolute inset-0 flex items-center justify-center p-4">
+                <h3 className="text-white text-xl font-semibold text-center">All Items</h3>
+              </div>
+            </Link>
             {categoriesWithCount.map((category) => (
               <Link
                 to={`/menu/${createSlug(category.name)}`}
