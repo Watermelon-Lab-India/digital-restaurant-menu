@@ -24,7 +24,7 @@ function App() {
             <Route path="/location" element={<Location />} />
             <Route path="/booktable" element={<BookTable />} />
           </Route>
-          <Route path="/party-hall-menu" element={<PdfViewer pdfUrl="https://drive.google.com/file/d/123uvjE15OQorD9saF2uPGBvBKqPzKXOY/preview" title="Party Hall Menu" />} />
+          <Route path="/party-hall-menu" element={<PdfViewer pdfUrl="https://drive.google.com/file/d/1ddKGH6qdrvYPnRgfDSC40Ydy9PQr-Vm2/preview" title="Party Hall Menu" />} />
           <Route path="/kitty-menu" element={<PdfViewer pdfUrl="https://drive.google.com/file/d/1bpvg8kq2nuyfZEQ5zGPI0r_5Gw8IffWq/preview" title="Kitty Menu" />} />
         </Routes>
       </Router>

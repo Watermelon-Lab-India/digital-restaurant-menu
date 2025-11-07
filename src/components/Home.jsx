@@ -102,16 +102,7 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-gray-800 mb-6">Our Story</h2>
-            <p className="text-lg text-gray-800 mb-8">Established with a passion for authentic Indian sweets and snacks, {config.restaurantName} has been serving happiness since 1990.</p>
-            <Link
-              to="/about"
-              className="text-amber-600 font-semibold hover:text-amber-700 inline-flex items-center"
-            >
-              Learn more about us
-              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </Link>
+            <p className="text-lg text-gray-800 mb-8">{config.ourStory}</p>
           </div>
         </div>
       </section>
