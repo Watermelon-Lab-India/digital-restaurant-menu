@@ -154,27 +154,43 @@ const Menu = () => {
           <div className="flex space-x-2">
             <button
               onClick={() => handleCategoryClick('all')}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
+              className={`flex-shrink-0 flex flex-col items-center justify-center p-2 rounded-lg transition-colors w-24 h-24 ${
                 activeCategory === 'all'
-                  ? 'bg-amber-500 text-white'
+                  ? 'bg-amber-500 text-white shadow-lg'
                   : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
               }`}
               ref={activeCategory === 'all' ? activeCategoryRef : null}
             >
-              All Items
+              <img
+                src="/logo.png" // Using a placeholder logo for "All Items"
+                alt="All Items"
+                className="w-15 h-15 object-cover rounded-lg mb-1"
+              />
+              <span className="text-xs font-medium text-center whitespace-nowrap overflow-hidden text-ellipsis">
+                All Items
+              </span>
             </button>
             {categories.map((category, index) => (
               <button
                 key={index}
                 onClick={() => handleCategoryClick(category)}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
+                className={`flex-shrink-0 flex flex-col items-center justify-center p-2 rounded-lg transition-colors w-24 h-24 ${
                   normalizeCategory(activeCategory) === normalizeCategory(category)
-                    ? 'bg-amber-500 text-white'
+                    ? 'bg-amber-500 text-white shadow-lg'
                     : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
                 }`}
                 ref={normalizeCategory(activeCategory) === normalizeCategory(category) ? activeCategoryRef : null}
               >
-                {category.name}
+                {category.imageUrl && (
+                  <img
+                    src={category.imageUrl}
+                    alt={category.name}
+                    className="w-15 h-15 object-cover rounded-lg mb-1"
+                  />
+                )}
+                <span className="text-xs font-medium text-center whitespace-nowrap overflow-hidden text-ellipsis">
+                  {category.name}
+                </span>
               </button>
             ))}
           </div>
@@ -186,7 +202,7 @@ const Menu = () => {
             <div className="flex space-x-2">
               <button
                 onClick={() => handleSubCategoryClick('all')}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
+                className={`px-3 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
                   activeSubCategory === 'all'
                     ? 'bg-amber-500 text-white'
                     : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
@@ -205,7 +221,7 @@ const Menu = () => {
                   <button
                     key={index}
                     onClick={() => handleSubCategoryClick(subCategory)}
-                    className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
+                    className={`px-3 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
                       normalizeCategory(activeSubCategory) === normalizeCategory(subCategory)
                         ? 'bg-amber-500 text-white'
                         : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
