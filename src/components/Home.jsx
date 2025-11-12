@@ -45,12 +45,12 @@ const Home = () => {
           <div className="categories-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {/* All Items Tile */}
             <Link to="/menu"
-              className="category-card relative block overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="category-card relative block overflow-hidden rounded-xl shadow-xl hover:shadow-xl transition-shadow duration-300"
                style={{
                 backgroundImage: `url(/logo.png)`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                paddingTop: '100%', // Maintain aspect ratio for card size
+                // backgroundSize: 'cover',
+                // backgroundPosition: 'center',
+                // paddingTop: '100%', // Maintain aspect ratio for card size
               }}
             >
 
@@ -63,12 +63,12 @@ const Home = () => {
               <Link
                 to={`/menu/${createSlug(category.name)}`}
                 key={category.name}
-                className="category-card block overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white"
+                className="category-card block overflow-hidden rounded-xl shadow-xl hover:shadow-xl transition-shadow duration-300 bg-white"
                 style={{
                   backgroundImage: `url(${category.imageUrl})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  paddingTop: '100%', // Maintain aspect ratio for card size
+                  // backgroundSize: 'cover',
+                  // backgroundPosition: 'center',
+                  // paddingTop: '100%', // Maintain aspect ratio for card size
                 }}
               >
                
