@@ -1,62 +1,33 @@
-import { getGoogleDriveDirectLink } from './googleDriveUtils';
+import config from './config';
 
-// src/utils/fetchMenu.js
-export async function fetchMenu(sheetId, sheetName = 'menu') {
+export const fetchMenu = async () => {
+  const sheetId = config.googleSheetId;
+  const sheetName = config.googleSheetName;
+  const url = `https://opensheet.elk.sh/${sheetId}/${sheetName}`;
+
   try {
-    // console.log("Attempting to fetch menu from Google Sheets...");
-    const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}`;
-    
     const response = await fetch(url);
     if (!response.ok) {
-      throw new Error('Failed to fetch data from Google Sheets');
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-
-    const csvText = await response.text();
-    const parsedData = parseCSV(csvText);
-    // console.log("Successfully fetched and parsed menu data.", parsedData);
-    return parsedData;
+    const jsonData = await response.json();
     
+    // Transform the JSON data to match the expected menu item structure
+    const menu = jsonData.map((item, index) => ({
+      id: `${item.Category}-${item['Sub-Category']}-${item.Name}-${index}`.replace(/\s+/g, '-').toLowerCase(), // Unique ID for React keys
+      category: item.Category || '',
+      subCategory: item['Sub-Category'] || '',
+      name: item.Name || '',
+      price: item['Price (INR)'] || '',
+      tags: item.Tags || '',
+      description: item.Description || '',
+      mood: item.Mood || '',
+      imageUrl: item['Image Url'] || '',
+    }));
+
+    return menu;
   } catch (error) {
-    console.error('Error fetching menu. Using fallback data:', error);
-    // Return fallback data if the fetch fails
-    return [
-      { category: 'Starters', name: 'Paneer Tikka', price: 120, imageUrl: '' },
-      { category: 'Starters', name: 'Hara Bhara Kabab', price: 180, imageUrl: '' },
-      { category: 'Main Course', name: 'Paneer Butter Masala', price: 260, imageUrl: '' },
-      { category: 'Breads', name: 'Butter Naan', price: 30, imageUrl: '' },
-      { category: 'Beverages', name: 'Lassi', price: 60, imageUrl: '' },
-      { category: 'Desserts', name: 'Gulab Jamun', price: 70, imageUrl: '' }
-    ];
+    console.error("Failed to fetch menu:", error);
+    return [];
   }
-}
-
-function parseCSV(csvText) {
-  const lines = csvText.trim().split('\n');
-  
-  const data = [];
-  
-  // Skip header row (index 0) and process each line
-  for (let i = 1; i < lines.length; i++) {
-    const line = lines[i];
-    if (line.trim() === '') continue;
-    
-    // Handle quoted values that might contain commas
-    const columns = line.match(/"(.*?)"|([^,\s]+)(?=\s*,|\s*$)/g) || [];
-    const cleanColumns = columns.map(col => 
-      col.replace(/^"|"$/g, '').trim()
-    );
-
-    if (cleanColumns.length >= 3 && cleanColumns[0] && cleanColumns[1] && cleanColumns[2]) {
-      const item = {
-        category: cleanColumns[0],
-        name: cleanColumns[1],
-        price: cleanColumns[2],
-        description: cleanColumns[4] || '',
-        imageUrl: getGoogleDriveDirectLink(cleanColumns[5]) || '' // Convert Google Drive link
-      };
-      data.push(item);
-    }
-  }
-  
-  return data;
-}
+};

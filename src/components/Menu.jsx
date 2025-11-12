@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useMenu } from '../context/MenuContext';
+import ItemList from './ItemList';
 
 const Menu = () => {
-  const { menuItems, categories, loading, error } = useMenu();
+  const { menuItems, categories, subCategories, loading, error } = useMenu();
   const { category: urlCategory } = useParams();
   const [activeCategory, setActiveCategory] = useState('all');
+  const [activeSubCategory, setActiveSubCategory] = useState('all');
   const navigate = useNavigate();
   const activeCategoryRef = useRef(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -14,6 +16,7 @@ const Menu = () => {
   useEffect(() => {
     if (searchTerm) {
       setActiveCategory('all');
+      setActiveSubCategory('all');
       navigate('/menu'); // Optionally navigate to /menu to clear category from URL
     }
   }, [searchTerm, navigate]);
@@ -38,6 +41,7 @@ const Menu = () => {
   useEffect(() => {
     if (!urlCategory) {
       setActiveCategory('all');
+      setActiveSubCategory('all');
       return;
     }
 
@@ -49,9 +53,11 @@ const Menu = () => {
 
       if (foundCategory) {
         setActiveCategory(foundCategory);
+        setActiveSubCategory('all'); // Reset sub-category when main category changes
       } else {
         navigate('/menu');
         setActiveCategory('all');
+        setActiveSubCategory('all');
       }
     }
   }, [urlCategory, categories, navigate]);
@@ -74,11 +80,19 @@ const Menu = () => {
 
   // Filter items by active category and search term
   const filteredItems = useMemo(() => {
-    let itemsToFilter = activeCategory === 'all' 
-      ? menuItems 
-      : menuItems.filter(item => 
-          normalizeCategory(item.category) === normalizeCategory(activeCategory)
-        );
+    let itemsToFilter = menuItems;
+
+    if (activeCategory !== 'all') {
+      itemsToFilter = itemsToFilter.filter(item => 
+        normalizeCategory(item.category) === normalizeCategory(activeCategory)
+      );
+    }
+
+    if (activeSubCategory !== 'all') {
+      itemsToFilter = itemsToFilter.filter(item => 
+        normalizeCategory(item.subCategory) === normalizeCategory(activeSubCategory)
+      );
+    }
 
     if (searchTerm) {
       itemsToFilter = itemsToFilter.filter(item => 
@@ -87,17 +101,23 @@ const Menu = () => {
       );
     }
     return itemsToFilter;
-  }, [activeCategory, menuItems, searchTerm]);
+  }, [activeCategory, activeSubCategory, menuItems, searchTerm]);
 
   const handleCategoryClick = (category) => {
     if (category === 'all') {
       navigate('/menu');
       setActiveCategory('all');
+      setActiveSubCategory('all');
     } else {
       const urlFriendlyCategory = createSlug(category);
       navigate(`/menu/${urlFriendlyCategory}`);
       setActiveCategory(category); // Keep the full category object in activeCategory
+      setActiveSubCategory('all'); // Reset sub-category when main category changes
     }
+  };
+
+  const handleSubCategoryClick = (subCategory) => {
+    setActiveSubCategory(subCategory);
   };
 
   if (loading) {
@@ -108,11 +128,14 @@ const Menu = () => {
     );
   }
 
+  const currentCategoryTitle = activeCategory === 'all' ? 'Our Menu' : activeCategory.name;
+  const currentSubCategoryTitle = activeSubCategory === 'all' ? '' : ` - ${activeSubCategory}`;
+
   return (
     <div className="py-12 bg-gray-50 min-h-screen">
       <div className="container mx-auto px-4">
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">
-          {activeCategory === 'all' ? 'Our Menu' : activeCategory.name} {/* Display category.name */}
+          {currentCategoryTitle}{currentSubCategoryTitle}
         </h1>
         
         {/* Search Input */}
@@ -151,36 +174,52 @@ const Menu = () => {
                 }`}
                 ref={normalizeCategory(activeCategory) === normalizeCategory(category) ? activeCategoryRef : null}
               >
-                {category.name} {/* Display category.name */}
+                {category.name}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Menu Items */}
-        <div className="flex flex-col gap-4">
-          {filteredItems.length > 0 ? (
-            filteredItems.map((item, index) => (
-              <div key={index} className="flex items-center justify-between bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow duration-200 p-3">
-                <div className="flex-1 flex flex-col">
-                  <h3 className="text-base font-medium text-gray-800 group-hover:text-amber-600 transition-colors line-clamp-2">
-                    {item.name}
-                  </h3>
-                  <p className="text-sm text-gray-500 line-clamp-2">
-                    {item.description || ''}
-                  </p>
-                </div>
-                <span className="text-amber-600 font-medium text-base whitespace-nowrap ml-4">
-                  ₹{item.price}
-                </span>
-              </div>
-            ))
-          ) : (
-            <div className="col-span-full text-center py-12">
-              <p className="text-gray-500">No items found in this category.</p>
+        {/* Sub-Category Filter */}
+        {activeCategory !== 'all' && (
+          <div className="flex overflow-x-auto pb-2 mb-6 hide-scrollbar">
+            <div className="flex space-x-2">
+              <button
+                onClick={() => handleSubCategoryClick('all')}
+                className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
+                  activeSubCategory === 'all'
+                    ? 'bg-amber-500 text-white'
+                    : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+                }`}
+              >
+                All Sub-Categories
+              </button>
+              {subCategories
+                .filter(subCat => 
+                  menuItems.some(item => 
+                    normalizeCategory(item.category) === normalizeCategory(activeCategory) && 
+                    normalizeCategory(item.subCategory) === normalizeCategory(subCat)
+                  )
+                )
+                .map((subCategory, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleSubCategoryClick(subCategory)}
+                    className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
+                      normalizeCategory(activeSubCategory) === normalizeCategory(subCategory)
+                        ? 'bg-amber-500 text-white'
+                        : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+                    }`}
+                  >
+                    {subCategory}
+                  </button>
+                ))}
             </div>
-          )}
-        </div>
+          </div>
+        )}
+
+        {/* Menu Items */}
+        <ItemList items={filteredItems} />
         
         {error && (
           <div className="mt-4 p-4 bg-yellow-50 text-yellow-800 rounded-lg text-center">

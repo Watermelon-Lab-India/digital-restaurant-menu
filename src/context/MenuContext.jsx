@@ -7,6 +7,7 @@ const MenuContext = createContext();
 export const MenuProvider = ({ children }) => {
   const [menuItems, setMenuItems] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -16,7 +17,6 @@ export const MenuProvider = ({ children }) => {
         const data = await fetchMenu(config.googleSheetId, config.googleSheetName);
         setMenuItems(data);
         
-        // Extract unique categories with their image URLs
         const uniqueCategoriesMap = new Map();
         data.forEach(item => {
           if (!uniqueCategoriesMap.has(item.category)) {
@@ -24,6 +24,10 @@ export const MenuProvider = ({ children }) => {
           }
         });
         setCategories(Array.from(uniqueCategoriesMap.values()));
+
+        const uniqueSubCategories = Array.from(new Set(data.map(item => item.subCategory)));
+        setSubCategories(uniqueSubCategories);
+
       } catch (err) {
         setError('Failed to load menu. Using sample data instead.');
         console.error(err);
@@ -36,7 +40,7 @@ export const MenuProvider = ({ children }) => {
   }, []);
 
   return (
-    <MenuContext.Provider value={{ menuItems, categories, loading, error }}>
+    <MenuContext.Provider value={{ menuItems, categories, subCategories, loading, error }}>
       {children}
     </MenuContext.Provider>
   );

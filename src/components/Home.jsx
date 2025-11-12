@@ -1,10 +1,10 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useMenu } from '../context/MenuContext';
 import config from '../utils/config';
 
 const Home = () => {
-  const { menuItems } = useMenu();
+  const { categories } = useMenu();
   // Normalize category names to match Menu.jsx logic
   const normalizeCategory = (category) => {
     if (!category) return '';
@@ -19,34 +19,15 @@ const Home = () => {
       .replace(/\s+/g, '-') // Replace spaces with hyphens
       .replace(/[^a-z0-9-]/g, ''); // Remove all characters that are not a-z, 0-9, or hyphen
   };
-  const categoriesWithCount = useMemo(() => {
-    if (!menuItems) return [];
-    const categoryMap = new Map();
-
-
-    menuItems.forEach(item => {
-      if (!categoryMap.has(item.category)) {
-        const originalCategory = item.category;
-        const lowerCaseCategory = createSlug(originalCategory);//.toLowerCase().replace(/ /g, '-').replace(/[^a-z0-9-]/g, ''); // Normalize category name: lowercase, spaces to hyphens, remove other special chars
-        const imageUrl = `/categoryImages/${lowerCaseCategory}.png`; // Construct image URL directly
-        console.log(`Processing category: "${originalCategory}", Processed for matching: "${lowerCaseCategory}", Image URL: ${imageUrl}`);
-        categoryMap.set(item.category, { name: item.category, imageUrl: imageUrl, count: 0 });
-      }
-      categoryMap.get(item.category).count++;
-    });
-    return Array.from(categoryMap.values());
-  }, [menuItems]);
-
-
 
   return (
     <div className="home-container">
       {/* Hero Section */}
       <section className="bg-amber-50 py-10">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">Welcome to {config.restaurantName}</h1>
+          <h1 className="text-3xl font-bold text-gray-800 mb-4">Welcome to <span className="text-amber-600">{config.restaurantName}</span></h1>
           <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-            Experience the authentic taste of traditional Indian sweets and snacks, made with love and the finest ingredients.
+            {config.description}
           </p>
           <Link
             to="/menu"
@@ -65,22 +46,24 @@ const Home = () => {
             {/* All Items Tile */}
             <Link to="/menu"
               className="category-card relative block overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
-              style={{
-                backgroundImage: `url(/logo-village.png)`,
+               style={{
+                backgroundImage: `url(/logo.png)`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 paddingTop: '100%', // Maintain aspect ratio for card size
               }}
             >
-              <div className="absolute inset-0 flex items-center justify-center p-4">
-                <h3 className="text-white text-xl font-semibold text-center">All Items</h3>
+
+              {/* Category name */}
+              <div className="p-1 text-center bg-white rounded-lg">
+                <h3 className="text-black text-lg font-semibold !text-black">All Items</h3>
               </div>
             </Link>
-            {categoriesWithCount.map((category) => (
+            {categories.map((category) => (
               <Link
                 to={`/menu/${createSlug(category.name)}`}
                 key={category.name}
-                className="category-card relative block overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+                className="category-card block overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white"
                 style={{
                   backgroundImage: `url(${category.imageUrl})`,
                   backgroundSize: 'cover',
@@ -88,14 +71,19 @@ const Home = () => {
                   paddingTop: '100%', // Maintain aspect ratio for card size
                 }}
               >
-                <div className="absolute inset-0  flex items-center justify-center p-4">
-                  <h3 className="text-white text-xl font-semibold text-center">{category.name}</h3>
+               
+
+                {/* Category name */}
+                <div className="p-1 text-center bg-white rounded-lg">
+                  <h3 className="text-black text-lg font-semibold !text-black">{category.name}</h3>
                 </div>
               </Link>
             ))}
+
           </div>
         </div>
       </section>
+
 
       {/* About Preview Section */}
       <section className="py-16 bg-gray-50">
