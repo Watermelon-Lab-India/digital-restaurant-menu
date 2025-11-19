@@ -15,14 +15,13 @@ function App() {
   return (
     <MenuProvider>
       <Router>
-        <div className="w-20 h-20 bg-primary"></div> {/* Temporary div for color testing */}
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="/menu/:category" element={<Menu />} />
             <Route path="/about" element={<About />} />
-            <Route path="/location" element={<Location />} />
+            <Route path="/location" element="<Location />" />
             <Route path="/booktable" element={<BookTable />} />
           </Route>
           <Route path="/party-hall-menu" element={<PdfViewer pdfUrl="/pdfs/Party Hall Package_1.pdf" title="Party Hall Menu" />} />

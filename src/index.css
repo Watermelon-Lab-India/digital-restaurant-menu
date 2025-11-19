@@ -28,7 +28,7 @@ body {
 /* Add any other global styles here */
 
 .categories-grid {
-  @apply grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3 p-3;
+  @apply grid grid-cols-2 lg:grid-cols-4 gap-3 p-3;
 }
 
 .category-card {

@@ -42,10 +42,10 @@ const Home = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Explore Our Menu</h2>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="categories-grid">
             <Link
               to="/menu"
-              className="category-card block overflow-hidden rounded-xl shadow-xl hover:shadow-xl transition-shadow duration-300 bg-white relative group aspect-w-16 aspect-h-9 relative"
+              className="category-card block overflow-hidden rounded-xl shadow-xl hover:shadow-xl transition-shadow duration-300 bg-white relative group relative"
               style={{
                 backgroundImage: `url(/logo.png)`,
                 backgroundSize: 'cover',
@@ -54,15 +54,15 @@ const Home = () => {
             >
 
               {/* Category name */}
-              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black rounded-lg p-2 z-10">
-                <h3 className="text-white text-lg md:text-xl font-semibold">All Items</h3>
+              <div className="my-special-color absolute bottom-2 left-1/2 -translate-x-1/2 bg-white rounded-lg p-2 z-10">
+                <h3 className="text-black text-lg md:text-xl font-semibold">All Items</h3>
               </div>
             </Link>
             {categories.map((category) => (
               <Link
                 to={`/menu/${createSlug(category.name)}`}
                 key={category.name}
-                className="category-card block overflow-hidden rounded-xl shadow-xl hover:shadow-xl transition-shadow duration-300 bg-white relative group aspect-w-16 aspect-h-9 relative"
+                className="category-card block overflow-hidden rounded-xl shadow-xl hover:shadow-xl transition-shadow duration-300 bg-white relative group relative"
                 style={{
                   backgroundImage: `url(${category.imageUrl})`,
                   backgroundSize: 'cover',
@@ -72,8 +72,8 @@ const Home = () => {
                
 
                 {/* Category name */}
-                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black rounded-lg p-2 z-10">
-                  <h3 className="text-white text-lg md:text-xl font-semibold">{category.name}</h3>
+                <div className="my-special-color absolute bottom-2 left-1/2 -translate-x-1/2 bg-white rounded-lg p-2 z-10">
+                  <h3 className="text-black text-lg md:text-xl font-semibold">{category.name}</h3>
                 </div>
               </Link>
             ))}
