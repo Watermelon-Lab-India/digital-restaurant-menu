@@ -31,7 +31,7 @@ const Home = () => {
           </p>
           <Link
             to="/menu"
-            className="bg-amber-500 hover:bg-amber-600 text-white font-semibold py-3 px-8 rounded-full inline-block transition duration-300"
+            className="my-special-color bg-primary hover:bg-primary text-white font-semibold py-3 px-8 rounded-full inline-block transition duration-300"
           >
             View Our Menu
           </Link>
@@ -41,45 +41,42 @@ const Home = () => {
       {/* Categories Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-800 text-center mb-10">Our Categories</h2>
-          <div className="categories-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {/* All Items Tile */}
-            <Link to="/menu"
-              className="category-card relative block overflow-hidden rounded-xl shadow-xl hover:shadow-xl transition-shadow duration-300"
-               style={{
+          <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Explore Our Menu</h2>
+          <div className="grid grid-cols-2 gap-4">
+            <Link
+              to="/menu"
+              className="category-card block overflow-hidden rounded-xl shadow-xl hover:shadow-xl transition-shadow duration-300 bg-white relative group aspect-w-16 aspect-h-9 relative"
+              style={{
                 backgroundImage: `url(/logo.png)`,
-                // backgroundSize: 'cover',
-                // backgroundPosition: 'center',
-                // paddingTop: '100%', // Maintain aspect ratio for card size
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
               }}
             >
 
               {/* Category name */}
-              <div className="p-1 text-center bg-white rounded-lg">
-                <h3 className="text-black text-lg font-semibold !text-black">All Items</h3>
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black rounded-lg p-2 z-10">
+                <h3 className="text-white text-lg md:text-xl font-semibold">All Items</h3>
               </div>
             </Link>
             {categories.map((category) => (
               <Link
                 to={`/menu/${createSlug(category.name)}`}
                 key={category.name}
-                className="category-card block overflow-hidden rounded-xl shadow-xl hover:shadow-xl transition-shadow duration-300 bg-white"
+                className="category-card block overflow-hidden rounded-xl shadow-xl hover:shadow-xl transition-shadow duration-300 bg-white relative group aspect-w-16 aspect-h-9 relative"
                 style={{
                   backgroundImage: `url(${category.imageUrl})`,
-                  // backgroundSize: 'cover',
-                  // backgroundPosition: 'center',
-                  // paddingTop: '100%', // Maintain aspect ratio for card size
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
                 }}
               >
                
 
                 {/* Category name */}
-                <div className="p-1 text-center bg-white rounded-lg">
-                  <h3 className="text-black text-lg font-semibold !text-black">{category.name}</h3>
+                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black rounded-lg p-2 z-10">
+                  <h3 className="text-white text-lg md:text-xl font-semibold">{category.name}</h3>
                 </div>
               </Link>
             ))}
-
           </div>
         </div>
       </section>

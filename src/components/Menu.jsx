@@ -156,7 +156,7 @@ const Menu = () => {
               onClick={() => handleCategoryClick('all')}
               className={`flex-shrink-0 flex flex-col items-center justify-center p-2 rounded-lg transition-colors w-24 h-24 ${
                 activeCategory === 'all'
-                  ? 'bg-amber-500 text-white shadow-lg'
+                  ? 'my-special-color bg-amber-500 text-white shadow-lg'
                   : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
               }`}
               ref={activeCategory === 'all' ? activeCategoryRef : null}
@@ -176,7 +176,7 @@ const Menu = () => {
                 onClick={() => handleCategoryClick(category)}
                 className={`flex-shrink-0 flex flex-col items-center justify-center p-2 rounded-lg transition-colors w-24 h-24 ${
                   normalizeCategory(activeCategory) === normalizeCategory(category)
-                    ? 'bg-amber-500 text-white shadow-lg'
+                    ? 'my-special-color bg-amber-500 text-white shadow-lg'
                     : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
                 }`}
                 ref={normalizeCategory(activeCategory) === normalizeCategory(category) ? activeCategoryRef : null}
@@ -204,7 +204,7 @@ const Menu = () => {
                 onClick={() => handleSubCategoryClick('all')}
                 className={`px-3 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
                   activeSubCategory === 'all'
-                    ? 'bg-amber-500 text-white'
+                    ? 'my-special-color bg-amber-500 text-white'
                     : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
                 }`}
               >
@@ -223,7 +223,7 @@ const Menu = () => {
                     onClick={() => handleSubCategoryClick(subCategory)}
                     className={`px-3 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
                       normalizeCategory(activeSubCategory) === normalizeCategory(subCategory)
-                        ? 'bg-amber-500 text-white'
+                        ? 'my-special-color bg-amber-500 text-white'
                         : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
                     }`}
                   >

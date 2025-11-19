@@ -49,3 +49,7 @@ body {
 .category-card p {
   @apply relative z-10 text-xs text-white mt-1;
 }
+
+.my-special-color {
+  background-color: #395038;   
+}

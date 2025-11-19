@@ -15,6 +15,7 @@ function App() {
   return (
     <MenuProvider>
       <Router>
+        <div className="w-20 h-20 bg-primary"></div> {/* Temporary div for color testing */}
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />

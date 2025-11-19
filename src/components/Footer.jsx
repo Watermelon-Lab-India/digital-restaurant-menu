@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Opening Hours */}
           <div className="text-center md:text-left">
             <h3 className="text-xl font-bold mb-4">OPENING HOURS</h3>
-            <p className="text-amber-300 text-lg font-semibold">{config.openingHours}</p>
+            <p className="text-primary text-lg font-semibold">{config.openingHours}</p>
             <p className="mt-2">Happily Serving You Everyday!!</p>
           </div>
 
@@ -22,8 +22,8 @@ const Footer = () => {
               {config.contact.email && <p>{config.contact.email}</p>}
               {config.contact.phone && (
                 <p className="flex items-center justify-center md:justify-start">
-                  <FaWhatsapp className="mr-2 h-5 w-5 text-amber-300" />
-                  <a href={`https://wa.me/${config.contact.phone.replace(/\s+/g, '')}`} className="hover:text-amber-300" target="_blank" rel="noopener noreferrer">
+                  <FaWhatsapp className="mr-2 h-5 w-5 text-primary" />
+                  <a href={`https://wa.me/${config.contact.phone.replace(/\s+/g, '')}`} className="hover:text-primary" target="_blank" rel="noopener noreferrer">
                     {config.contact.phone}
                   </a>
                 </p>
@@ -48,12 +48,12 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4">FOLLOW US</h3>
             <div className="flex justify-center md:justify-start space-x-4">
               {config.social.facebook && (
-                <a href={config.social.facebook} className="text-2xl hover:text-amber-300 transition-colors">
+                <a href={config.social.facebook} className="text-2xl hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">
                   <Facebook className="h-6 w-6" />
                 </a>
               )}
               {config.social.instagram && (
-                <a href={config.social.instagram} className="text-2xl hover:text-amber-300 transition-colors">
+                <a href={config.social.instagram} className="text-2xl hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">
                   <Instagram className="h-6 w-6" />
                 </a>
               )}
