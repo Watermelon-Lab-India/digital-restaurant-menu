@@ -40,7 +40,7 @@ import config from './config';
 export const fetchMenu = async () => {
   const sheetId = config.googleSheetId;
   const sheetName = config.googleSheetName;
-  const apiKey = "AIzaSyCzban_ZwE3ThljUYlqMfEkBrrEq3BdiKk";
+  const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
 
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=${apiKey}`;
 
