@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useMenu } from '../context/MenuContext';
+import config from '../utils/config';
 import ItemList from './ItemList';
-
 const Menu = () => {
   const { menuItems, categories, subCategories, loading, error } = useMenu();
   const { category: urlCategory } = useParams();
@@ -162,7 +162,7 @@ const Menu = () => {
               ref={activeCategory === 'all' ? activeCategoryRef : null}
             >
               <img
-                src="/logo.png" // Using a placeholder logo for "All Items"
+                src={config.logoPath} // Using the logo from config for "All Items"
                 alt="All Items"
                 className="w-15 h-15 object-cover rounded-lg mb-1"
               />
