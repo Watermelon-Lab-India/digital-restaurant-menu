@@ -10,6 +10,7 @@ import Location from './components/Location';
 import BookTable from './components/BookTable';
 import PdfViewer from './components/PdfViewer';
 import MainLayout from './components/MainLayout';
+import OLPdfViewer from './components/OLPdfViewer';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           </Route>
           <Route path="/party-hall-menu" element={<PdfViewer pdfUrl="/pdfs/Party Hall Package_1.pdf" title="Party Hall Menu" />} />
           <Route path="/kitty-menu" element={<PdfViewer pdfUrl="/pdfs/kittymenu.pdf" title="Kitty Menu" />} />
+          <Route path="/7cloud-wedding-package" element={<OLPdfViewer pdfUrl="https://storage.googleapis.com/cuco-images/7cloud/wedding.pdf" title="Wedding Package" />} />
         </Routes>
       </Router>
     </MenuProvider>
