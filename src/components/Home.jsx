@@ -25,7 +25,7 @@ const Home = () => {
       {/* Hero Section */}
       <section className="bg-amber-50 py-10">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">Welcome to <span className="text-amber-600">{config.restaurantName}</span></h1>
+          <h1 className="text-3xl font-bold text-gray-800 mb-4">Welcome to <span className="text-my-special-color">{config.restaurantName}</span></h1>
           <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
             {config.description}
           </p>

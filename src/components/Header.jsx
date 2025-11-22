@@ -36,7 +36,7 @@ const Header = () => {
                 to={item.path}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   isActive(item.path)
-                    ? 'bg-amber-100 text-amber-700'
+                    ? 'bg-amber-100 text-my-special-color'/*'bg-amber-100 text-amber-700'*/
                     : 'text-gray-700 hover:bg-amber-50'
                 }`}
               >

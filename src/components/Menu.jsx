@@ -161,11 +161,11 @@ const Menu = () => {
               }`}
               ref={activeCategory === 'all' ? activeCategoryRef : null}
             >
-              <img
+              {/* <img
                 src={config.logoPath} // Using the logo from config for "All Items"
                 alt="All Items"
                 className="w-15 h-15 object-cover rounded-lg mb-1"
-              />
+              /> */}
               <span className="text-xs font-medium text-center whitespace-nowrap overflow-hidden text-ellipsis">
                 All Items
               </span>
