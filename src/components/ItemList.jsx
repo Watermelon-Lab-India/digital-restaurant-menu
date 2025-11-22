@@ -14,7 +14,7 @@ const ItemList = ({ items }) => {
                 {item.description || ''}
               </p>
             </div>
-            <span className="text-amber-600 font-medium text-base whitespace-nowrap ml-4">
+            <span className="text-my-special-color font-medium text-base whitespace-nowrap ml-4">
               ₹{item.price}
             </span>
           </div>
