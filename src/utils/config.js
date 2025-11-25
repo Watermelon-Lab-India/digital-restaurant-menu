@@ -1,24 +1,24 @@
 const config = {
-  googleSheetName: "7cloud",
+  googleSheetName: "sattva",
   googleSheetId:"1Bx7T76lqX0QJIx7ElZ1eHHb3NNxQu1GsJbbXdyvfm3E",
-  restaurantName: "7th Cloud Club, Bar & Resort",
-  logoPath: "/7cloudlogo.png",
-  ourStory: "Our resort features 65 elegantly designed rooms and suites, world-class amenities, and unmatched hospitality. From multi-cuisine restaurants and a stylish bar to expansive banquet halls, conference rooms, and verdant lawns, every detail is thoughtfully curated to create memorable experiences.",
-  description: "Welcome to 7th Cloud Club, Bar & Resort, Indore – a lush and luxurious retreat set amidst the charm of India’s cleanest city and the financial hub of central India. Spread across 5 acres of serene landscapes, our resort blends sophistication with comfort, making it the perfect destination for both business and leisure travelers.",
+  restaurantName: "Sattva: Food For Soul",
+  logoPath: "/Sattva_logo.png",
+  ourStory: "Whether you’re here to explore regional Indian delicacies or indulge in contemporary vegetarian cuisine, Sattva promises a wholesome dining experience that nourishes both body and soul. Pure Veg | Nature-Inspired Ambiance | Family-Friendly",
+  description: "Welcome to Sattva: Food For Soul, a pure-veg dining destination in Indore where nature, taste, and tranquility come together. Inspired by the essence of balance and goodness, every dish at Sattva is thoughtfully crafted using fresh ingredients and traditional recipes with a modern touch",
   contact: {
-    address: "3, CAT Rd, near Hosana Church, near D-Mart, Rajendra Nagar, Indore, Madhya Pradesh 453331",
-    phone: "+91 6262262000",
-    email: "reservations@aceotel.com",
+    address: "17/3 Hukmakhedi, CAT Rd, behind cement godown, in front of Parmanu Nagar Extension Road, RRCAT, Indore, Madhya Pradesh 452012",
+    // phone: "+91 6262262000",
+    // email: "reservations@aceotel.com",
   },
-  openingHours: "09:00 AM - 11:00 PM",
+  openingHours: "12:00 AM - 11:00 PM",
   social: {
-    facebook: "https://www.facebook.com/7thcloudClubBarandRestaurant/",
-    instagram: "https://www.instagram.com/7thcloud_resorts/",
+    facebook: "https://www.facebook.com/profile.php?id=61581769449138",
+    instagram: "https://www.instagram.com/sattva_ffs/",
     // twitter: "https://twitter.com/apnasweets",
   },
-  footerText: "7th Cloud Club, Bar & Resort. All rights reserved.",
+  footerText: "Sattva: Food For Soul. All rights reserved.",
   poweredBy:"CuCo Bot",
-  mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1443.1781050282023!2d75.81743521039684!3d22.670501371524814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fdef83eb3705%3A0x2f76e6a15e1d4c88!2s7th%20Cloud%20Club%2C%20Bar%20%26%20Resort%20by%20Aceotel!5e0!3m2!1sen!2sin!4v1763550371262!5m2!1sen!2sin",
+  mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3681.768982445896!2d75.8101411!3d22.6624004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fd06b70df9c1%3A0xcd2b5a5f258a8330!2sSattva%3A%20Food%20For%20Soul!5e0!3m2!1sen!2sin!4v1764054125792!5m2!1sen!2sin",
 
 };
 
