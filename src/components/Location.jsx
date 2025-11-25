@@ -52,7 +52,7 @@ const Location = () => {
               <div className="pt-4">
                 <h3 className="font-medium text-gray-700 mb-2">Opening Hours</h3>
                 <p className="text-gray-600">
-                  Monday - Sunday: 10:30 AM - 11:30 PM
+                  {config.openingHours}
                 </p>
               </div>
             </div>
