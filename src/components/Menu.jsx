@@ -95,9 +95,12 @@ const Menu = () => {
     }
 
     if (searchTerm) {
+      const searchTermLower = searchTerm.toLowerCase();
       itemsToFilter = itemsToFilter.filter(item => 
-        item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (item.description && item.description.toLowerCase().includes(searchTerm.toLowerCase()))
+        item.name.toLowerCase().includes(searchTermLower) ||
+        (item.description && item.description.toLowerCase().includes(searchTermLower)) ||
+        (item.category && item.category.toLowerCase().includes(searchTermLower)) ||
+        (item.subCategory && item.subCategory.toLowerCase().includes(searchTermLower))
       );
     }
     return itemsToFilter;
