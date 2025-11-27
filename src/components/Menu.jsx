@@ -83,21 +83,30 @@ const Menu = () => {
     let itemsToFilter = menuItems;
 
     if (activeCategory !== 'all') {
-      itemsToFilter = itemsToFilter.filter(item => 
+      itemsToFilter = itemsToFilter.filter(item =>
         normalizeCategory(item.category) === normalizeCategory(activeCategory)
       );
     }
 
     if (activeSubCategory !== 'all') {
-      itemsToFilter = itemsToFilter.filter(item => 
+      itemsToFilter = itemsToFilter.filter(item =>
         normalizeCategory(item.subCategory) === normalizeCategory(activeSubCategory)
       );
     }
 
     if (searchTerm) {
-      itemsToFilter = itemsToFilter.filter(item => 
-        item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (item.description && item.description.toLowerCase().includes(searchTerm.toLowerCase()))
+      const searchTermLower = searchTerm.toLowerCase();
+
+      itemsToFilter = itemsToFilter.filter(item =>
+
+        item.name.toLowerCase().includes(searchTermLower) ||
+
+        (item.description && item.description.toLowerCase().includes(searchTermLower)) ||
+
+        (item.category && item.category.toLowerCase().includes(searchTermLower)) ||
+
+        (item.subCategory && item.subCategory.toLowerCase().includes(searchTermLower))
+
       );
     }
     return itemsToFilter;
@@ -137,7 +146,7 @@ const Menu = () => {
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">
           {currentCategoryTitle}{currentSubCategoryTitle}
         </h1>
-        
+
         {/* Search Input */}
         <div className="mb-6">
           <input
@@ -154,11 +163,10 @@ const Menu = () => {
           <div className="flex space-x-2">
             <button
               onClick={() => handleCategoryClick('all')}
-              className={`flex-shrink-0 flex flex-col items-center justify-center p-2 rounded-lg transition-colors w-24 h-24 ${
-                activeCategory === 'all'
-                  ? 'my-special-color bg-amber-500 text-white shadow-lg'
-                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
-              }`}
+              className={`flex-shrink-0 flex flex-col items-center justify-center p-2 rounded-lg transition-colors w-24 h-24 ${activeCategory === 'all'
+                ? 'my-special-color bg-amber-500 text-white shadow-lg'
+                : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+                }`}
               ref={activeCategory === 'all' ? activeCategoryRef : null}
             >
               {/* <img
@@ -174,11 +182,10 @@ const Menu = () => {
               <button
                 key={index}
                 onClick={() => handleCategoryClick(category)}
-                className={`flex-shrink-0 flex flex-col items-center justify-center p-2 rounded-lg transition-colors w-24 h-24 ${
-                  normalizeCategory(activeCategory) === normalizeCategory(category)
-                    ? 'my-special-color bg-amber-500 text-white shadow-lg'
-                    : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
-                }`}
+                className={`flex-shrink-0 flex flex-col items-center justify-center p-2 rounded-lg transition-colors w-24 h-24 ${normalizeCategory(activeCategory) === normalizeCategory(category)
+                  ? 'my-special-color bg-amber-500 text-white shadow-lg'
+                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+                  }`}
                 ref={normalizeCategory(activeCategory) === normalizeCategory(category) ? activeCategoryRef : null}
               >
                 {category.imageUrl && (
@@ -202,18 +209,17 @@ const Menu = () => {
             <div className="flex space-x-2">
               <button
                 onClick={() => handleSubCategoryClick('all')}
-                className={`px-3 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
-                  activeSubCategory === 'all'
-                    ? 'my-special-color bg-amber-500 text-white'
-                    : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
-                }`}
+                className={`px-3 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${activeSubCategory === 'all'
+                  ? 'my-special-color bg-amber-500 text-white'
+                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+                  }`}
               >
                 All Sub-Categories
               </button>
               {subCategories
-                .filter(subCat => 
-                  menuItems.some(item => 
-                    normalizeCategory(item.category) === normalizeCategory(activeCategory) && 
+                .filter(subCat =>
+                  menuItems.some(item =>
+                    normalizeCategory(item.category) === normalizeCategory(activeCategory) &&
                     normalizeCategory(item.subCategory) === normalizeCategory(subCat)
                   )
                 )
@@ -221,11 +227,10 @@ const Menu = () => {
                   <button
                     key={index}
                     onClick={() => handleSubCategoryClick(subCategory)}
-                    className={`px-3 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
-                      normalizeCategory(activeSubCategory) === normalizeCategory(subCategory)
-                        ? 'my-special-color bg-amber-500 text-white'
-                        : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
-                    }`}
+                    className={`px-3 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${normalizeCategory(activeSubCategory) === normalizeCategory(subCategory)
+                      ? 'my-special-color bg-amber-500 text-white'
+                      : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+                      }`}
                   >
                     {subCategory}
                   </button>
@@ -236,7 +241,7 @@ const Menu = () => {
 
         {/* Menu Items */}
         <ItemList items={filteredItems} />
-        
+
         {error && (
           <div className="mt-4 p-4 bg-yellow-50 text-yellow-800 rounded-lg text-center">
             {error}

@@ -48,7 +48,7 @@ const Home = () => {
               className="category-card block overflow-hidden rounded-xl shadow-xl hover:shadow-xl transition-shadow duration-300 bg-white relative group relative"
               style={{
                 backgroundImage: `url(${config.logoPath})`,
-                backgroundSize: '60% 60%',
+                backgroundSize: '60%',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',
                 backgroundColor: 'white',

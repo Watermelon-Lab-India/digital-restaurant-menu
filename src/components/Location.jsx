@@ -30,7 +30,7 @@ const Location = () => {
               <div>
                 <h3 className="font-medium text-gray-700">Phone</h3>
                 {address.phone ? (
-                  <a href={`tel:${address.phone.replace(/\s+/g, '')}`} className="text-amber-600 hover:underline">
+                  <a href={`tel:${address.phone.replace(/\s+/g, '')}`} className="text-my-special-color hover:underline">
                     {address.phone}
                   </a>
                 ) : (
@@ -41,7 +41,7 @@ const Location = () => {
               <div>
                 <h3 className="font-medium text-gray-700">Email</h3>
                 {address.email ? (
-                  <a href={`mailto:${address.email}`} className="text-amber-600 hover:underline">
+                  <a href={`mailto:${address.email}`} className="text-my-special-color hover:underline">
                     {address.email}
                   </a>
                 ) : (
@@ -52,7 +52,7 @@ const Location = () => {
               <div className="pt-4">
                 <h3 className="font-medium text-gray-700 mb-2">Opening Hours</h3>
                 <p className="text-gray-600">
-                  Monday - Sunday: 10:30 AM - 11:30 PM
+                  {config.openingHours}
                 </p>
               </div>
             </div>
