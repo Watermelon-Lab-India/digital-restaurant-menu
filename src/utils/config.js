@@ -1,26 +1,27 @@
 const config = {
-  googleSheetName: "7cloud",
+  googleSheetName: "thevillage",
   googleSheetId:"1Bx7T76lqX0QJIx7ElZ1eHHb3NNxQu1GsJbbXdyvfm3E",
-  restaurantName: "7th Cloud Club, Bar & Resort",
-  logoPath: "/7cloudlogo.png",
-  ourStory: "Our resort features 65 elegantly designed rooms and suites, world-class amenities, and unmatched hospitality. From multi-cuisine restaurants and a stylish bar to expansive banquet halls, conference rooms, and verdant lawns, every detail is thoughtfully curated to create memorable experiences.",
-  description: "Welcome to 7th Cloud Club, Bar & Resort, Indore – a lush and luxurious retreat set amidst the charm of India’s cleanest city and the financial hub of central India. Spread across 5 acres of serene landscapes, our resort blends sophistication with comfort, making it the perfect destination for both business and leisure travelers.",
+  restaurantName: "The Village By Maa Ki Rasoi",
+  logoPath: "/logo-village-192.png",
+  ourStory: "In November 2015, we started Maa Ki Rasoi with a dream to serve North Indian food that feels just like home — simple, soulful, and full of love. The start was challenging, but with dedication and consistency, we won people over—not just with taste, but with the comfort and nostalgia our food brought. What started as a small step has now become a trusted name, known for serving food that truly feels like home. #GHAR KA KHANA",
+  description: "Experience the authentic taste of traditional Indian sweets and snacks, made with love and the finest ingredients.",
   contact: {
-    address: "3, CAT Rd, near Hosana Church, near D-Mart, Rajendra Nagar, Indore, Madhya Pradesh 453331",
-    phone: "+91 6262262000",
-    email: "reservations@aceotel.com",
+    address: "2563-E, Ring Rd, Sector E, Sudama Nagar, Indore, Madhya Pradesh 452009",
+    phone: "+91 9243362902",
+    // email: "reservations@aceotel.com",
   },
-  openingHours: "09:00 AM - 11:00 PM",
+  openingHours: "10:30 AM - 11:30 PM",
   social: {
-    facebook: "https://www.facebook.com/7thcloudClubBarandRestaurant/",
-    instagram: "https://www.instagram.com/7thcloud_resorts/",
+    // facebook: "https://www.facebook.com/7thcloudClubBarandRestaurant/",
+    instagram: "https://www.instagram.com/the_village_in/",
     // twitter: "https://twitter.com/apnasweets",
   },
-  footerText: "7th Cloud Club, Bar & Resort. All rights reserved.",
+  footerText: "The Village By Maa Ki Rasoi. All rights reserved",
   poweredBy:"CuCo Bot",
-  mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1443.1781050282023!2d75.81743521039684!3d22.670501371524814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fdef83eb3705%3A0x2f76e6a15e1d4c88!2s7th%20Cloud%20Club%2C%20Bar%20%26%20Resort%20by%20Aceotel!5e0!3m2!1sen!2sin!4v1763550371262!5m2!1sen!2sin",
+  mapUrl: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14724.19264364421!2d75.82848!3d22.689251!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fda95daa0a91%3A0xdb3f59a3b17d15d8!2sThe%20Village%20By%20Maa%20Ki%20Rasoi!5e0!3m2!1sen!2sin!4v1776421481046!5m2!1sen!2sin",
 
 };
+
 
 export default config;
 
